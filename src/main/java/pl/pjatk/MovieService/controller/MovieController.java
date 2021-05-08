@@ -1,10 +1,7 @@
 package pl.pjatk.MovieService.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.pjatk.MovieService.model.Movie;
 import pl.pjatk.MovieService.service.MovieService;
 
@@ -34,5 +31,10 @@ public class MovieController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        return ResponseEntity.ok().build();                                                  //TODO
     }
 }
