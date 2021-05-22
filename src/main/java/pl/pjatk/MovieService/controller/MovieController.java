@@ -20,12 +20,12 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<Movie>> findAllMovies() {
-        return ResponseEntity.ok(movieService.getAllMovies());
+        return ResponseEntity.ok(movieService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Movie> findMovieById(@PathVariable Long id) {
-        Optional<Movie> byId = movieService.getMovie(id);
+        Optional<Movie> byId = movieService.findByID(id);
         if (byId.isPresent()) {
             return ResponseEntity.ok(byId.get());
         } else {
@@ -38,10 +38,6 @@ public class MovieController {
         return ResponseEntity.ok(movieService.addMovie(movie));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-        return ResponseEntity.ok(movieService.updateMovie(id, movie));
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {

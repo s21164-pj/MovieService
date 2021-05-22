@@ -1,14 +1,21 @@
 package pl.pjatk.MovieService.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+    @Enumerated(EnumType.STRING)
     private MovieCategory category;
     private String author;
-    private String rating;
+    private int rating;
 
-    public Movie(Long id, String name, MovieCategory category, String author, String rating) {
+    public Movie(Long id, String name, MovieCategory category, String author, int rating) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -51,11 +58,11 @@ public class Movie {
         this.author = author;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 }
