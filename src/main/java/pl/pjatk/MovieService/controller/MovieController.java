@@ -26,11 +26,7 @@ public class MovieController {
     @GetMapping("/{id}")
     public ResponseEntity<Movie> findMovieById(@PathVariable Long id) {
         Optional<Movie> byId = movieService.findByID(id);
-        if (byId.isPresent()) {
-            return ResponseEntity.ok(byId.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return byId.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -43,5 +39,15 @@ public class MovieController {
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/available/{id}")
+    public ResponseEntity<Movie> setAvailability(@PathVariable Long id) {
+        Optional<Movie> byId = movieService.findByID(id);
+        if (byId.isPresent()) {
+            return ResponseEntity.ok(movieService.setAvailability(id));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

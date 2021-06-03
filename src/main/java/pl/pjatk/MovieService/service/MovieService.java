@@ -2,7 +2,6 @@ package pl.pjatk.MovieService.service;
 
 import org.springframework.stereotype.Service;
 import pl.pjatk.MovieService.model.Movie;
-import pl.pjatk.MovieService.model.MovieCategory;
 import pl.pjatk.MovieService.repository.MovieRepository;
 
 import java.util.List;
@@ -38,4 +37,12 @@ public class MovieService {
         }
         return false;
     }
+
+    public Movie setAvailability(Long id) {
+        Optional<Movie> movieToUpdate = movieRepository.findById(id);
+
+        movieToUpdate.get().setAvailable(true);
+        return movieRepository.save(movieToUpdate.get());
+    }
+
 }

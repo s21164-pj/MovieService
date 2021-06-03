@@ -1,5 +1,7 @@
 package pl.pjatk.MovieService.model;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,9 +16,18 @@ public class Movie {
     private MovieCategory category;
     private String author;
     private int rating;
+    @NonNull
+    private boolean isAvailable;
 
-    public Movie(Long id, String name, MovieCategory category, String author, int rating) {
-        this.id = id;
+    public Movie(String name, MovieCategory category, String author, int rating, boolean isAvailable) {
+        this.name = name;
+        this.category = category;
+        this.author = author;
+        this.rating = rating;
+        this.isAvailable = isAvailable;
+    }
+
+    public Movie(String name, MovieCategory category, String author, int rating) {
         this.name = name;
         this.category = category;
         this.author = author;
@@ -64,5 +75,13 @@ public class Movie {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }
